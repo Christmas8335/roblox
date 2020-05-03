@@ -10,7 +10,12 @@ local Open = library:CreateWindow("Auto Open")
 local Settings = library:CreateWindow("Settings")
 
 --// Window Parts
-local AutoDuck = Farming:Toggle("Auto Farm", {flag = "Farm"})
+local AutoFarm = Farming:Toggle("Auto Farm", {flag = "Farm"})
+local BringDucks = Farming:Toggle("Bring Ducks", {flag = "BDucks"})
+
+Farming:Section("Buy")
+local AutoDuck = Farming:Toggle("Auto Buy Ducks", {flag = "Ducks"})
+local AutoEnergy = Farming:Toggle("Auto Buy Energy", {flag = "Energy"})
 
 Farming:Section("Teleporter")
 Farming:Dropdown("Area Teleporter", {
@@ -89,6 +94,32 @@ spawn(function()
             game.ReplicatedStorage.Events["Duck Events"].Swing:FireServer()
             local player = game.Players.LocalPlayer.Character.HumanoidRootPart
             player.CFrame = game.workspace['Refill Shop Parts']['1'].CFrame + Vector3.new(0,2,0)
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if Farming.flags.BDucks then
+            for i,v in pairs(game.workspace['Spawned Coins']:GetChildren()) do
+                v.Coin.CFrame = char.HumanoidRootPart.CFrame
+            end
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if Farming.flags.Ducks then
+            game:GetService("ReplicatedStorage").Events["Shop Events"].Ducks["Buy All"]:InvokeServer()
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if Farming.flags.Energy then
+            game:GetService("ReplicatedStorage").Events["Shop Events"].Energy["Buy All"]:InvokeServer()
         end
     end
 end)
