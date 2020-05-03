@@ -1,0 +1,128 @@
+--// Vars
+local player = game.Players.LocalPlayer
+local char = player.Character
+local vu = game:GetService("VirtualUser")
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/LmbJDLzg",true))()
+
+--// Tab Windows
+local Farming = library:CreateWindow("Main")
+local Open = library:CreateWindow("Auto Open")
+local Settings = library:CreateWindow("Settings")
+
+--// Window Parts
+local AutoDuck = Farming:Toggle("Auto Farm", {flag = "Farm"})
+
+Farming:Section("Teleporter")
+Farming:Dropdown("Area Teleporter", {
+    location = _G;
+    flag = "zonet";
+    list = {
+        "Spawn";
+        "Candy Zone";
+        "Winter Zone";
+        "Toy Zone";
+    }
+}, function(teleportz)
+    if _G.zonet == "Spawn" then
+        _G.acord = Vector3.new(55.6589127, 3.27249885, -30.9669418)
+    elseif _G.zonet == "Candy Zone" then
+        _G.acord = Vector3.new(437.049957, 3.2749989, 46.25)
+    elseif _G.zonet == "Winter Zone" then
+        _G.acord = Vector3.new(-331.049927, 3.2749989, 46.25)
+    elseif _G.zonet == "Toy Zone" then
+        _G.acord = Vector3.new(54.3500748, 3.1499989, -329.200012)
+    end
+    char.HumanoidRootPart.CFrame = CFrame.new(_G.acord)
+end)
+
+Open:Section("Selector")
+local EggList = Open:Dropdown("Eggs", {
+	location = _G;
+	flag = "egg";
+	list = {
+		"Basic Egg";
+		"Robotic Egg";
+		"Dragon Egg";
+		"Golden Egg";
+		"Candy Egg";
+		"Devil Egg";
+		"Ice Egg";
+        "Bunny Egg";
+        "Toy Egg";
+        "Lego Egg";
+	}
+}, function(tre)
+	if _G.egg == "Basic Egg" then 
+		_G.chosen = "Basic Egg"
+	elseif _G.egg == "Robotic Egg" then 
+		_G.chosen = "Robotic Egg"
+	elseif _G.egg == "Dragon Egg" then 
+		_G.chosen = "Dragon Egg"
+	elseif _G.egg == "Golden Egg" then 
+		_G.chosen = "Golden Egg"
+	elseif _G.egg == "Candy Egg" then 
+		_G.chosen = "Candy Egg"
+	elseif _G.egg == "Devil Egg" then 
+		_G.chosen = "Devil Egg"
+	elseif _G.egg == "Ice Egg" then 
+		_G.chosen = "Ice Egg"
+	elseif _G.egg == "Bunny Egg" then 
+        _G.chosen = "Bunny Egg"
+    elseif _G.egg == "Toy Egg" then 
+        _G.chosen = "Toy Egg"
+    elseif _G.egg == "Lego Egg" then 
+        _G.chosen = "Lego Egg"
+	end
+end)
+
+Open:Section("Toggle")
+local EggOpen = Open:Toggle("Open Eggs", {flag = "OpenEgg"})
+
+local Destroy = Settings:Button("Destroy GUI", function()
+    game.CoreGui.ScreenGui:Destroy()
+end)
+
+--// Functions
+spawn(function()
+    while wait() do
+        if Farming.flags.Farm then
+            game.ReplicatedStorage.Events["Duck Events"].Swing:FireServer()
+            local player = game.Players.LocalPlayer.Character.HumanoidRootPart
+            player.CFrame = game.workspace['Refill Shop Parts']['1'].CFrame + Vector3.new(0,2,0)
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if Open.flags.OpenEgg then
+            local args = {
+                [1] = _G.chosen,
+                    }
+
+            game:GetService("ReplicatedStorage").Events["Egg Events"].Open:InvokeServer(unpack(args))
+        end
+    end
+end)
+
+local abcd = true
+Settings:Bind("Toggle Gui", {
+   flag = "TGui";
+   kbonly = true;
+   default = Enum.KeyCode.LeftControl;
+}, function()
+if not abcd then
+    abcd = true
+    game.CoreGui.ScreenGui.Container.Visible = true
+else
+    abcd = false
+    game.CoreGui.ScreenGui.Container.Visible = false
+end
+end)
+
+--// Anti Afk
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+end)
