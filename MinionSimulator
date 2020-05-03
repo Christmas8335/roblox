@@ -1,0 +1,611 @@
+--// Vars
+local player = game.Players.LocalPlayer
+local char = player.Character
+local vu = game:GetService("VirtualUser")
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/LmbJDLzg",true))()
+library.options.underlinecolor = "rainbow"
+
+--// Tab Windows
+local Farming = library:CreateWindow("Main")
+local Open = library:CreateWindow("Auto Open")
+local Settings = library:CreateWindow("Settings")
+
+--// Window Parts
+local Mine = Farming:Toggle("Mine Aura", {flag = "Mine"})
+Farming:Section("Teleporter")
+Farming:Dropdown("Area Teleporter", {
+    location = _G;
+    flag = "zonet";
+    list = {
+        "Valley";
+        "Desert";
+        "Snow Hills";
+        "Autumn Falls";
+        "Sacred Blossoms";
+        "Candy Land";
+        "Dark Desert";
+        "Sunset Kingdom";
+        "Lava Land";
+        "Heaven";
+    }
+}, function(teleportz)
+    if _G.zonet == "Valley" then
+        _G.acord = Vector3.new(-7663.7998, 3630.4043, -664.289917)
+    elseif _G.zonet == "Desert" then
+        _G.acord = Vector3.new(-7665.99316, 3641.47534, -424.605743)
+    elseif _G.zonet == "Snow Hills" then
+        _G.acord = Vector3.new(-7667.53223, 3639.80396, -11.0041695)
+    elseif _G.zonet == "Autumn Falls" then
+        _G.acord = Vector3.new(-7658.65918, 3640.06079, 297.840973)
+    elseif _G.zonet == "Sacred Blossoms" then
+        _G.acord = Vector3.new(-7671.80762, 3641.75659, 629.921021)
+    elseif _G.zonet == "Candy Land" then
+        _G.acord = Vector3.new(-7659.08496, 3639.39331, 930.980164)
+    elseif _G.zonet == "Dark Desert" then
+        _G.acord = Vector3.new(-7665.99316, 3640.30347, 1160.04382)
+    elseif _G.zonet == "Sunset Kingdom" then
+        _G.acord = Vector3.new(-7659.08496, 3640.30396, 1562.41663)
+    elseif _G.zonet == "Lava Land" then
+        _G.acord = Vector3.new(-7665.99316, 3640.41016, 1758.54382)
+    elseif _G.zonet == "Heaven" then
+        _G.acord = Vector3.new(-7673.88477, 3640.53345, 2184.41675)
+    elseif _G.zonet == "Country Side" then
+        _G.acord = Vector3.new(-8158.73682, 4467.25732, -62767.9609)
+    elseif _G.zonet == "Rocky Mountains" then
+        _G.acord = Vector3.new(-7800.43604, 4469.36035, -62773.7227)
+    elseif _G.zonet == "September" then
+        _G.acord = Vector3.new(-7770.56348, 4468.72314, -62367.0078)
+    elseif _G.zonet == "Beach" then
+        _G.acord = Vector3.new(-7283.91602, 4469.63574, -62277.0977)
+    elseif _G.zonet == "Building Blocks" then
+        _G.acord = Vector3.new(-6758.53809, 4469.81689, -62288.2031)
+    elseif _G.zonet == "Windy" then
+        _G.acord = Vector3.new(-6374.92725, 4468.81104, -62297.5938)
+    end
+    char.HumanoidRootPart.CFrame = CFrame.new(_G.acord)
+end)
+
+Open:Section("Selector")
+
+local EggList = Open:Dropdown("Eggs", {
+	location = _G;
+	flag = "egg";
+	list = {
+		"Common Egg (Gold)";
+		"Uncommon Egg (Gold)";
+		"Rare Egg (Gold)";
+		"Epic Egg (Gold)";
+		"Legendary Egg (Gold)";
+		"Mythical Egg (Gold)";
+		"Exclusive Egg (Gold)";
+        "Godly Egg (Gold)";
+        "Tail Egg (Gems)";
+        "Wing Egg (Gems)";
+        "Shield Egg (Gems)";
+	}
+}, function(tre)
+	if _G.egg == "Common Egg (Gold)" then 
+		_G.chosen = "Zone1"
+	elseif _G.egg == "Unommon Egg (Gold)" then 
+		_G.chosen = "Zone2"
+	elseif _G.egg == "Rare Egg (Gold)" then 
+		_G.chosen = "Zone3"
+	elseif _G.egg == "Epic Egg (Gold)" then 
+		_G.chosen = "Zone4"
+	elseif _G.egg == "Legendary Egg (Gold)" then 
+		_G.chosen = "Zone5"
+	elseif _G.egg == "Mythical Egg (Gold)" then 
+		_G.chosen = "Zone6"
+	elseif _G.egg == "Exclusive Egg (Gold)" then 
+		_G.chosen = "Zone8"
+	elseif _G.egg == "Godly Egg (Gold)" then 
+        _G.chosen = "Zone10"
+    elseif _G.egg == "Tail Egg (Gems)" then 
+        _G.chosen = "Zone12"
+    elseif _G.egg == "Wing Egg (Gems)" then 
+        _G.chosen = "Zone14"
+    elseif _G.egg == "Shield Egg (Gems)" then 
+		_G.chosen = "Zone16"
+	end
+end)
+
+local CrateList = Open:Dropdown("Crates", {
+	location = _G;
+	flag = "hat";
+	list = {
+		"Common Crate (Gems)";
+		"Uncommon Crate (Gems)";
+		"Rare Crate (Gems)";
+	}
+}, function(treq)
+	if _G.hat == "Common Crate (Gems)" then 
+		_G.chozen = "Zone11"
+	elseif _G.hat == "Uncommon Crate (Gems)" then 
+		_G.chozen = "Zone13"
+	elseif _G.hat == "Rare Crate (Gems)" then 
+		_G.chozen = "Zone15"
+	end
+end)
+
+Open:Section("Toggles")
+
+local EggOpen = Open:Toggle("Open Eggs", {flag = "OpenEgg"})
+local HatOpen = Open:Toggle("Open Crates", {flag = "OpenHat"})
+
+local Destroy = Settings:Button("Destroy GUI", function()
+    game.CoreGui.ScreenGui:Destroy()
+end)
+
+--// Functions
+local function getclosest(zone)
+    local distance = math.huge
+    local closest
+    local minethings = game:GetService("Workspace").Storage.Clickables[zone]:GetChildren()
+    for i=1,#minethings do 
+        local v = minethings[i]
+        if v:IsA("Model") and v.PrimaryPart and game.Players.LocalPlayer:DistanceFromCharacter(v.PrimaryPart.Position)<distance then 
+            distance = game.Players.LocalPlayer:DistanceFromCharacter(v.PrimaryPart.Position)
+            closest = v
+        end
+    end
+    return closest
+end
+
+local petids = {}
+
+spawn(function()
+    while wait()do
+    if Farming.flags.Mine then
+    local pets = game:GetService("Workspace").Storage.Pets.Garbage[game.Players.LocalPlayer.Name]:GetChildren()
+    local zone
+    for i=1,#pets do 
+        local v = pets[i]    
+        if v:FindFirstChild("PetClientModule") then 
+            local a = require(v.PetClientModule)
+            if a.MiningZone ~= nil then 
+                zone = a.MiningZone
+            end
+            if not table.find(petids,v) then 
+                table.insert(petids,v)
+            end
+        end
+    end
+    if zone then 
+        for i=1,#petids do 
+            local v = petids[i]
+            game:GetService("ReplicatedStorage").Events.PartUpdateEvent:FireServer({
+                ["PartName"] = getclosest(zone).Name,
+                ["PetId"] = v.Name,
+                ["UpdateType"] = "StartMining",
+                ["Zone"] = zone,
+            })
+        end
+    end
+end
+end
+end)
+
+game:GetService("Workspace").Storage.Pets.Garbage[game.Players.LocalPlayer.Name].ChildRemoved:Connect(function(a)
+    local b = a
+    for i=1,#petids do 
+        local v = petids[i]
+        if tostring(v) == tostring(b) then 
+            table.remove(petids,i)
+        end
+    end
+end)local function getclosest(zone)
+    local distance = math.huge
+    local closest
+    local minethings = game:GetService("Workspace").Storage.Clickables[zone]:GetChildren()
+    for i=1,#minethings do 
+        local v = minethings[i]
+        if v:IsA("Model") and v.PrimaryPart and game.Players.LocalPlayer:DistanceFromCharacter(v.PrimaryPart.Position)<distance then 
+            distance = game.Players.LocalPlayer:DistanceFromCharacter(v.PrimaryPart.Position)
+            closest = v
+        end
+    end
+    return closest
+end
+
+local petids = {}
+
+spawn(function()
+    while wait()do 
+    if Farming.flags.Mine then
+    local pets = game:GetService("Workspace").Storage.Pets.Garbage[game.Players.LocalPlayer.Name]:GetChildren()
+    local zone
+    for i=1,#pets do 
+        local v = pets[i]    
+        if v:FindFirstChild("PetClientModule") then 
+            local a = require(v.PetClientModule)
+            if a.MiningZone ~= nil then 
+                zone = a.MiningZone
+            end
+            if not table.find(petids,v) then 
+                table.insert(petids,v)
+            end
+        end
+    end
+    if zone then 
+        for i=1,#petids do 
+            local v = petids[i]
+            game:GetService("ReplicatedStorage").Events.PartUpdateEvent:FireServer({
+                ["PartName"] = getclosest(zone).Name,
+                ["PetId"] = v.Name,
+                ["UpdateType"] = "StartMining",
+                ["Zone"] = zone,
+            })
+        end
+    end
+end
+end
+end)
+
+game:GetService("Workspace").Storage.Pets.Garbage[game.Players.LocalPlayer.Name].ChildRemoved:Connect(function(a)
+    local b = a
+    for i=1,#petids do 
+        local v = petids[i]
+        if tostring(v) == tostring(b) then 
+            table.remove(petids,i)
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if Open.flags.OpenEgg then
+            local args = {
+                [1] = {
+                    ["EggType"] = _G.chosen,
+                    ["UpdateType"] = "Open",
+                    ["Amount"] = 1,
+                },
+            }
+            
+            game:GetService("ReplicatedStorage").Functions.EggFunction:InvokeServer(unpack(args))
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if Open.flags.OpenHat then
+            local args = {
+                [1] = {
+                    ["Amount"] = 1,
+                    ["UpdateType"] = "Open",
+                    ["CrateType"] = _G.chozen,
+                },
+            }
+
+            game:GetService("ReplicatedStorage").Functions.CrateFunction:InvokeServer(unpack(args))
+        end
+    end
+end)
+
+local abcd = true
+Settings:Bind("Toggle Gui", {
+   flag = "TGui";
+   kbonly = true;
+   default = Enum.KeyCode.LeftControl;
+}, function()
+if not abcd then
+    abcd = true
+    game.CoreGui.ScreenGui.Container.Visible = true
+else
+    abcd = false
+    game.CoreGui.ScreenGui.Container.Visible = false
+end
+end)
+
+--// Anti Afk
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+end)--// Vars
+local player = game.Players.LocalPlayer
+local char = player.Character
+local vu = game:GetService("VirtualUser")
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/LmbJDLzg",true))()
+library.options.underlinecolor = "rainbow"
+
+--// Tab Windows
+local Farming = library:CreateWindow("Main")
+local Open = library:CreateWindow("Auto Open")
+local Settings = library:CreateWindow("Settings")
+
+--// Window Parts
+local Mine = Farming:Toggle("Mine Aura", {flag = "Mine"})
+Farming:Section("Teleporter")
+Farming:Dropdown("Area Teleporter", {
+    location = _G;
+    flag = "zonet";
+    list = {
+        "Valley";
+        "Desert";
+        "Snow Hills";
+        "Autumn Falls";
+        "Sacred Blossoms";
+        "Candy Land";
+        "Dark Desert";
+        "Sunset Kingdom";
+        "Lava Land";
+        "Heaven";
+    }
+}, function(teleportz)
+    if _G.zonet == "Valley" then
+        _G.acord = Vector3.new(-7663.7998, 3630.4043, -664.289917)
+    elseif _G.zonet == "Desert" then
+        _G.acord = Vector3.new(-7665.99316, 3641.47534, -424.605743)
+    elseif _G.zonet == "Snow Hills" then
+        _G.acord = Vector3.new(-7667.53223, 3639.80396, -11.0041695)
+    elseif _G.zonet == "Autumn Falls" then
+        _G.acord = Vector3.new(-7658.65918, 3640.06079, 297.840973)
+    elseif _G.zonet == "Sacred Blossoms" then
+        _G.acord = Vector3.new(-7671.80762, 3641.75659, 629.921021)
+    elseif _G.zonet == "Candy Land" then
+        _G.acord = Vector3.new(-7659.08496, 3639.39331, 930.980164)
+    elseif _G.zonet == "Dark Desert" then
+        _G.acord = Vector3.new(-7665.99316, 3640.30347, 1160.04382)
+    elseif _G.zonet == "Sunset Kingdom" then
+        _G.acord = Vector3.new(-7659.08496, 3640.30396, 1562.41663)
+    elseif _G.zonet == "Lava Land" then
+        _G.acord = Vector3.new(-7665.99316, 3640.41016, 1758.54382)
+    elseif _G.zonet == "Heaven" then
+        _G.acord = Vector3.new(-7673.88477, 3640.53345, 2184.41675)
+    elseif _G.zonet == "Country Side" then
+        _G.acord = Vector3.new(-8158.73682, 4467.25732, -62767.9609)
+    elseif _G.zonet == "Rocky Mountains" then
+        _G.acord = Vector3.new(-7800.43604, 4469.36035, -62773.7227)
+    elseif _G.zonet == "September" then
+        _G.acord = Vector3.new(-7770.56348, 4468.72314, -62367.0078)
+    elseif _G.zonet == "Beach" then
+        _G.acord = Vector3.new(-7283.91602, 4469.63574, -62277.0977)
+    elseif _G.zonet == "Building Blocks" then
+        _G.acord = Vector3.new(-6758.53809, 4469.81689, -62288.2031)
+    elseif _G.zonet == "Windy" then
+        _G.acord = Vector3.new(-6374.92725, 4468.81104, -62297.5938)
+    end
+    char.HumanoidRootPart.CFrame = CFrame.new(_G.acord)
+end)
+
+Open:Section("Selector")
+
+local EggList = Open:Dropdown("Eggs", {
+	location = _G;
+	flag = "egg";
+	list = {
+		"Common Egg (Gold)";
+		"Uncommon Egg (Gold)";
+		"Rare Egg (Gold)";
+		"Epic Egg (Gold)";
+		"Legendary Egg (Gold)";
+		"Mythical Egg (Gold)";
+		"Exclusive Egg (Gold)";
+        "Godly Egg (Gold)";
+        "Tail Egg (Gems)";
+        "Wing Egg (Gems)";
+        "Shield Egg (Gems)";
+	}
+}, function(tre)
+	if _G.egg == "Common Egg (Gold)" then 
+		_G.chosen = "Zone1"
+	elseif _G.egg == "Unommon Egg (Gold)" then 
+		_G.chosen = "Zone2"
+	elseif _G.egg == "Rare Egg (Gold)" then 
+		_G.chosen = "Zone3"
+	elseif _G.egg == "Epic Egg (Gold)" then 
+		_G.chosen = "Zone4"
+	elseif _G.egg == "Legendary Egg (Gold)" then 
+		_G.chosen = "Zone5"
+	elseif _G.egg == "Mythical Egg (Gold)" then 
+		_G.chosen = "Zone6"
+	elseif _G.egg == "Exclusive Egg (Gold)" then 
+		_G.chosen = "Zone8"
+	elseif _G.egg == "Godly Egg (Gold)" then 
+        _G.chosen = "Zone10"
+    elseif _G.egg == "Tail Egg (Gems)" then 
+        _G.chosen = "Zone12"
+    elseif _G.egg == "Wing Egg (Gems)" then 
+        _G.chosen = "Zone14"
+    elseif _G.egg == "Shield Egg (Gems)" then 
+		_G.chosen = "Zone16"
+	end
+end)
+
+local CrateList = Open:Dropdown("Crates", {
+	location = _G;
+	flag = "hat";
+	list = {
+		"Common Crate (Gems)";
+		"Uncommon Crate (Gems)";
+		"Rare Crate (Gems)";
+	}
+}, function(treq)
+	if _G.hat == "Common Crate (Gems)" then 
+		_G.chozen = "Zone11"
+	elseif _G.hat == "Uncommon Crate (Gems)" then 
+		_G.chozen = "Zone13"
+	elseif _G.hat == "Rare Crate (Gems)" then 
+		_G.chozen = "Zone15"
+	end
+end)
+
+Open:Section("Toggles")
+
+local EggOpen = Open:Toggle("Open Eggs", {flag = "OpenEgg"})
+local HatOpen = Open:Toggle("Open Crates", {flag = "OpenHat"})
+
+local Destroy = Settings:Button("Destroy GUI", function()
+    game.CoreGui.ScreenGui:Destroy()
+end)
+
+--// Functions
+local function getclosest(zone)
+    local distance = math.huge
+    local closest
+    local minethings = game:GetService("Workspace").Storage.Clickables[zone]:GetChildren()
+    for i=1,#minethings do 
+        local v = minethings[i]
+        if v:IsA("Model") and v.PrimaryPart and game.Players.LocalPlayer:DistanceFromCharacter(v.PrimaryPart.Position)<distance then 
+            distance = game.Players.LocalPlayer:DistanceFromCharacter(v.PrimaryPart.Position)
+            closest = v
+        end
+    end
+    return closest
+end
+
+local petids = {}
+
+spawn(function()
+    while wait()do
+    if Farming.flags.Mine then
+    local pets = game:GetService("Workspace").Storage.Pets.Garbage[game.Players.LocalPlayer.Name]:GetChildren()
+    local zone
+    for i=1,#pets do 
+        local v = pets[i]    
+        if v:FindFirstChild("PetClientModule") then 
+            local a = require(v.PetClientModule)
+            if a.MiningZone ~= nil then 
+                zone = a.MiningZone
+            end
+            if not table.find(petids,v) then 
+                table.insert(petids,v)
+            end
+        end
+    end
+    if zone then 
+        for i=1,#petids do 
+            local v = petids[i]
+            game:GetService("ReplicatedStorage").Events.PartUpdateEvent:FireServer({
+                ["PartName"] = getclosest(zone).Name,
+                ["PetId"] = v.Name,
+                ["UpdateType"] = "StartMining",
+                ["Zone"] = zone,
+            })
+        end
+    end
+end
+end
+end)
+
+game:GetService("Workspace").Storage.Pets.Garbage[game.Players.LocalPlayer.Name].ChildRemoved:Connect(function(a)
+    local b = a
+    for i=1,#petids do 
+        local v = petids[i]
+        if tostring(v) == tostring(b) then 
+            table.remove(petids,i)
+        end
+    end
+end)local function getclosest(zone)
+    local distance = math.huge
+    local closest
+    local minethings = game:GetService("Workspace").Storage.Clickables[zone]:GetChildren()
+    for i=1,#minethings do 
+        local v = minethings[i]
+        if v:IsA("Model") and v.PrimaryPart and game.Players.LocalPlayer:DistanceFromCharacter(v.PrimaryPart.Position)<distance then 
+            distance = game.Players.LocalPlayer:DistanceFromCharacter(v.PrimaryPart.Position)
+            closest = v
+        end
+    end
+    return closest
+end
+
+local petids = {}
+
+spawn(function()
+    while wait()do 
+    if Farming.flags.Mine then
+    local pets = game:GetService("Workspace").Storage.Pets.Garbage[game.Players.LocalPlayer.Name]:GetChildren()
+    local zone
+    for i=1,#pets do 
+        local v = pets[i]    
+        if v:FindFirstChild("PetClientModule") then 
+            local a = require(v.PetClientModule)
+            if a.MiningZone ~= nil then 
+                zone = a.MiningZone
+            end
+            if not table.find(petids,v) then 
+                table.insert(petids,v)
+            end
+        end
+    end
+    if zone then 
+        for i=1,#petids do 
+            local v = petids[i]
+            game:GetService("ReplicatedStorage").Events.PartUpdateEvent:FireServer({
+                ["PartName"] = getclosest(zone).Name,
+                ["PetId"] = v.Name,
+                ["UpdateType"] = "StartMining",
+                ["Zone"] = zone,
+            })
+        end
+    end
+end
+end
+end)
+
+game:GetService("Workspace").Storage.Pets.Garbage[game.Players.LocalPlayer.Name].ChildRemoved:Connect(function(a)
+    local b = a
+    for i=1,#petids do 
+        local v = petids[i]
+        if tostring(v) == tostring(b) then 
+            table.remove(petids,i)
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if Open.flags.OpenEgg then
+            local args = {
+                [1] = {
+                    ["EggType"] = _G.chosen,
+                    ["UpdateType"] = "Open",
+                    ["Amount"] = 1,
+                },
+            }
+            
+            game:GetService("ReplicatedStorage").Functions.EggFunction:InvokeServer(unpack(args))
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if Open.flags.OpenHat then
+            local args = {
+                [1] = {
+                    ["Amount"] = 1,
+                    ["UpdateType"] = "Open",
+                    ["CrateType"] = _G.chozen,
+                },
+            }
+
+            game:GetService("ReplicatedStorage").Functions.CrateFunction:InvokeServer(unpack(args))
+        end
+    end
+end)
+
+local abcd = true
+Settings:Bind("Toggle Gui", {
+   flag = "TGui";
+   kbonly = true;
+   default = Enum.KeyCode.LeftControl;
+}, function()
+if not abcd then
+    abcd = true
+    game.CoreGui.ScreenGui.Container.Visible = true
+else
+    abcd = false
+    game.CoreGui.ScreenGui.Container.Visible = false
+end
+end)
+
+--// Anti Afk
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+end)
