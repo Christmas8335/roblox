@@ -21,9 +21,8 @@ local RebirthList = Farming:Dropdown("Select Rebirth", {
 	location = _G;
 	flag = "rebirth";
 	list = {
-        "(Place Holder)";
-		"1 Rebirth";
-		"5 Rebirths";
+	"1 Rebirth";
+	"5 Rebirths";
         "15 Rebirths";
         "50 Rebirths";
         "100 Rebirths";
