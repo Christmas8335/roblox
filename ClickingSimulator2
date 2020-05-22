@@ -71,7 +71,7 @@ local EggList = EggOpen:Dropdown("Select Egg", {
         "Scuba";
         "Event";
 	}
-}, function(rebi)
+}, function(eggo)
     if _G.egg == "Common" then 
         _G.SEgg = "Common"
     elseif _G.egg == "Fruit" then 
