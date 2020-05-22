@@ -67,7 +67,7 @@ end)
 spawn(function()
     while rs:wait() do
         if Farming.flags.FFarm then
-            for i = 1, 50 do
+            for i = 1, 20 do
                 if game.Players.LocalPlayer.Backpack:FindFirstChild("Coin") then
                     game.Players.LocalPlayer.Backpack.Coin.Parent = game.Players.LocalPlayer.Character
                     else
