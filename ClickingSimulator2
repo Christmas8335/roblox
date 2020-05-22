@@ -32,6 +32,8 @@ local RebirthList = Farming:Dropdown("Select Rebirth", {
         "50 Rebirths";
         "100 Rebirths";
         "250 Rebirths";
+        "750 Rebirths";
+        "2.5k Rebirths";
 	}
 }, function(rebi)
     if _G.rebirth == "1 Rebirth" then 
@@ -46,6 +48,10 @@ local RebirthList = Farming:Dropdown("Select Rebirth", {
         _G.remote = workspace.Events.Give7
     elseif _G.rebirth == "250 Rebirths" then 
         _G.remote = workspace.Events.Give8
+    elseif _G.rebirth == "750 Rebirths" then 
+        _G.remote = workspace.Events.Give9
+    elseif _G.rebirth == "2.5k Rebirths" then 
+        _G.remote = workspace.Events.Give10
     end
 end)
 
@@ -69,9 +75,10 @@ local EggList = EggOpen:Dropdown("Select Egg", {
         "Magma";
         "Water";
         "Scuba";
+        "Meteor";
         "Event";
 	}
-}, function(eggo)
+}, function(rebi)
     if _G.egg == "Common" then 
         _G.SEgg = "Common"
     elseif _G.egg == "Fruit" then 
@@ -82,6 +89,8 @@ local EggList = EggOpen:Dropdown("Select Egg", {
         _G.SEgg = "Water"
     elseif _G.egg == "Scuba" then 
         _G.SEgg = "Scuba"
+    elseif _G.egg == "Meteor" then 
+        _G.SEgg = "Meteor"
     elseif _G.egg == "Event" then 
         _G.SEgg = "Event"
     end
