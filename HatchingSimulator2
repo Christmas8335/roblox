@@ -1,0 +1,129 @@
+--// Main Stuff
+local player = game.Players.LocalPlayer
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/LmbJDLzg",true))()
+
+--// Other Stuff
+local char = player.Character
+local rs = game:GetService("RunService").RenderStepped
+local vu = game:GetService("VirtualUser")
+_G.SEgg = "Common" --Prevents auto open eggs from breaking
+
+--// Tab Windows
+local Farming = library:CreateWindow("Farming")
+local EggOpen = library:CreateWindow("Auto Egg Open")
+local Settings = library:CreateWindow("Settings")
+
+--// Window Parts
+Farming:Section("Auto Click")
+local FastFarm = Farming:Toggle("Fast Farm", {flag = "FFarm"})
+
+EggOpen:Section("Egg Selector")
+local EggList = EggOpen:Dropdown("Select Egg", {
+	location = _G;
+	flag = "egg";
+	list = {
+        "Common";
+        "Rare";
+        "Epic";
+        "Sky";
+        "Sun";
+        "150K";
+        "Main Reward";
+        "Rainbow Diamond";
+        "Rainbow God Stone";
+	}
+}, function(rebi)
+    if _G.egg == "Common" then 
+        _G.SEgg = "Common"
+    elseif _G.egg == "Rare" then 
+        _G.SEgg = "Rare"
+    elseif _G.egg == "Epic" then 
+        _G.SEgg = "Epic"
+    elseif _G.egg == "Sky" then 
+        _G.SEgg = "Sky"
+    elseif _G.egg == "Sun" then 
+        _G.SEgg = "Sun"
+    elseif _G.egg == "150K" then 
+        _G.SEgg = "150K"
+    elseif _G.egg == "Main Reward" then 
+        _G.SEgg = "DevilOfNatural"
+    elseif _G.egg == "Rainbow Diamond" then 
+        _G.SEgg = "RainBowDiamond"
+    elseif _G.egg == "Rainbow God Stone" then 
+        _G.SEgg = "RainbowGodStone"
+    end
+end)
+
+EggOpen:Section("Egg Toggles")
+local OpenOne = EggOpen:Toggle("Open 1 Egg", {flag = "O1E"})
+local OpenThree = EggOpen:Toggle("Open 3 Eggs", {flag = "O3E"})
+
+local Destroy = Settings:Button("Destroy GUI", function()
+    game.CoreGui.ScreenGui:Destroy()
+end)
+
+--// Functions
+--// Auto Click
+spawn(function()
+    while rs:wait() do
+        if Farming.flags.FFarm then
+            for i = 1, 20 do
+                if game.Players.LocalPlayer.Backpack:FindFirstChild("Coin") then
+                    game.Players.LocalPlayer.Backpack.Coin.Parent = game.Players.LocalPlayer.Character
+                    else
+                    game.Players.LocalPlayer.Character.Coin:Activate()
+                end
+            end
+        end
+    end
+end)
+--// Auto Open 1 Egg
+spawn(function()
+    while wait() do
+        if EggOpen.flags.O1E then
+            local args = {
+                [1] = game:GetService("Players").LocalPlayer,
+                [2] = _G.SEgg,
+                [3] = false,
+            }
+            game:GetService("ReplicatedStorage").KeyBind:InvokeServer(unpack(args))
+        end
+    end
+end)
+--// Auto Open 3 Eggs
+spawn(function()
+    while wait() do
+        if EggOpen.flags.O3E then
+            local args = {
+                [1] = game:GetService("Players").LocalPlayer,
+                [2] = _G.SEgg,
+                [3] = true,
+            }
+            game:GetService("ReplicatedStorage").KeyBind:InvokeServer(unpack(args))
+        end
+    end
+end)
+
+local abcd = true
+Settings:Bind("Toggle Gui", {
+   flag = "TGui";
+   kbonly = true;
+   default = Enum.KeyCode.LeftControl;
+}, function()
+if not abcd then
+    abcd = true
+    game.CoreGui.ScreenGui.Container.Visible = true
+else
+    abcd = false
+    game.CoreGui.ScreenGui.Container.Visible = false
+end
+end)
+--// Credits
+warn("[Hatching Simulator 2 Script]")
+warn("[Everything - Christmas ⭐#8335]")
+--// Anti Afk
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+end)
